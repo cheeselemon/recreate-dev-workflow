@@ -5,20 +5,14 @@ on: delete
 jobs:
   recreateBranch:
     runs-on: ubuntu-latest
-    if: github.event.ref_type == 'branch'
+    if: github.event.ref_type == 'branch' && github.event.ref == 'dev'
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v4
         with:
           ref: 'main'
           
-      - name: Debug Event Info
-        run: |
-          echo "Event Ref: ${{ github.event.ref }}"
-          echo "Event Ref Type: ${{ github.event.ref_type }}"
-
       - name: Recreate Dev Branch
-        if: github.event.ref == 'refs/heads/dev' || github.event.ref == 'dev'
         run: |
           git config --global user.name 'Github Actions'
           git config --global user.email 'dev@taling.me'
