@@ -18,7 +18,7 @@ jobs:
           echo "Event Ref Type: ${{ github.event.ref_type }}"
 
       - name: Recreate Dev Branch
-        if: github.event.ref == 'refs/heads/dev'
+        if: github.event.ref == 'refs/heads/dev' || github.event.ref == 'dev'
         run: |
           git config --global user.name 'Github Actions'
           git config --global user.email 'dev@taling.me'
